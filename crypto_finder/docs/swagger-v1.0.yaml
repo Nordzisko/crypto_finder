@@ -1,0 +1,107 @@
+swagger: "2.0"
+
+info:
+  description: "API documentation for the Crypto Finder project."
+  version: "1.0"
+  title: "Crypto Finder"
+  contact:
+    email: "danisik.n@gmail.com"
+produces:
+  - "application/json"
+consumes:
+  - "application/json"
+basePath: "/"
+
+
+#################
+#               #
+#  DEFINITIONS  #
+#               #
+#################
+
+definitions:
+
+  Currency:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        example: 1
+      currency:
+        type: "string"
+        example: "EUR"
+      date_:
+        type: "string"
+        format: "timestamp"
+        example: "2018-09-15T15:53:00.000+00:00"
+        description: "Non-nullable ISO 8601 datetime with timezone"
+      price:
+        type: "decimal"
+        example: 0.897
+
+  Price:
+    type: "object"
+    properties:
+      timestamp:
+        type: "string"
+        format: "timestamp"
+        example: "2018-09-15T15:53:00.000+00:00"
+        description: "Non-nullable ISO 8601 datetime with timezone"
+      price:
+        type: "decimal"
+        example: 0.897
+
+###########
+#         #
+#  PATHS  #
+#         #
+###########
+
+paths:
+
+  /price/{currency}:
+    get:
+      tags:
+      - "Price"
+      summary: "Return a single last bid price and its timestamp for given currency."
+      description: "Return last bid price and its timestamp for given 'currency/USDT' symbol. "
+      operationId: "get_currency_price"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "currency"
+        in: "path"
+        description: "Get last bid for this 'currency/USDT' symbol"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/Price"
+
+  /price/history:
+    get:
+      tags:
+        - "Price"
+      summary: "Return a descending sorted history of currency bids"
+      description: "Return list of dicts with single currency bid and its timestamp"
+      operationId: "get_currency_history"
+      produces:
+        - "application/json"
+      parameters:
+        - name: page
+          in: query
+          description: "Page"
+          required: false
+          type: integer
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: "#/definitions/Currency"

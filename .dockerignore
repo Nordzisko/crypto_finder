@@ -1,0 +1,16 @@
+env
+venv
+.env
+*.cfg
+*.pyc
+*.egg
+*.egg-info
+dist
+build
+eggs
+pip-log.txt
+.coverage
+.tox
+.git
+nosetests.xml
+**/.idea

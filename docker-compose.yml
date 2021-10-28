@@ -1,0 +1,52 @@
+version: '2'
+services:
+  app:
+    restart: always
+    build:
+      context: .
+    command:
+      - gunicorn
+      - crypto_finder.app:create_app_async
+      - --config=gunicorn_config.py
+      - --reload
+    ports:
+      - '8899:8899'
+    environment:
+      CRYPTO_FINDER_DEBUG: "1"
+      HISTORY_PAGE_SIZE: "20"
+      DEFAULT_EXCHANGE: "kucoin"
+      DEFAULT_BASE_CURRENCY: "USDT"
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    networks:
+      - aiohttp
+    tty: true
+    volumes:
+      - .:/app
+
+
+  postgres:
+    restart: always
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: admin
+      POSTGRES_DB: cryptofinder_db
+      POSTGRES_INITDB_ARGS: --data-checksums --auth-local trust
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5432:5432"
+    volumes:
+      - "docker-db-volume:/var/lib/postgresql/data"
+    networks:
+      - aiohttp
+
+volumes:
+  docker-db-volume:
+    driver: local
+
+networks:
+  aiohttp:

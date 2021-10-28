@@ -1,0 +1,13 @@
+aiohttp
+aiohttp-apispec
+aiohttp-swagger
+asyncpg
+ccxt
+cchardet  # faster encoding detection for aiohttp
+colorama
+gunicorn
+simplejson
+SQLAlchemy==1.4.26
+structlog
+structlog-pretty
+uvloop  # faster event loop worker for gunicorn
