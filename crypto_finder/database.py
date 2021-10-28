@@ -91,7 +91,7 @@ class DatabaseManager:
         """
         Dispose DB engine
         """
-        self.engine.dispose()
+        await self.engine.dispose()
 
 
 db = DatabaseManager()
