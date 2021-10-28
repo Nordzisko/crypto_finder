@@ -1,6 +1,8 @@
-"""Configuration of structlog and code for ad-hoc processors."""
-
+"""
+Configuration of structlog and code for ad-hoc processors.
+"""
 from time import time
+from typing import Dict
 
 import structlog
 import structlog_pretty
@@ -41,7 +43,7 @@ def configure_structlog():
     )
 
 
-def unix_timestamper(_, __, event_dict):
+def unix_timestamper(_, __, event_dict: Dict) -> Dict:
     """
     Add a ``timestamp`` key to the event dict with the current Unix time.
     """
@@ -49,7 +51,7 @@ def unix_timestamper(_, __, event_dict):
     return event_dict
 
 
-def drop_debug_logs(_, level, event_dict):
+def drop_debug_logs(_, level: str, event_dict: Dict) -> Dict:
     """
     Drop the event if its level is ``debug``.
     """

@@ -3,7 +3,7 @@ import importlib.util
 from pathlib import Path
 
 
-def get_package_contents(package_name):
+def get_package_contents(package_name: str) -> set:
     """
     Given a package name ('crypto_finder.models') will return all the modules in that package
     Source: https://stackoverflow.com/questions/487971/is-there-a-standard-way-to-list-names-of-python-modules-in-a-package

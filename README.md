@@ -14,6 +14,8 @@ Application that connects to exchanges thru `ccxt` library and obtain prices fro
 Default exchange used in this project is *kucoin*. Base currency is *USDT*.
 Both these values can be changes in `docker-compose.yml` file or in `settings.py` as default value.
 
+Docs to this API is accessible on URL `http://localhost:8899/docs` and is done with Swagger.
+
 ## Usage
 
 To install & run:

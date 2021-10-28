@@ -1,14 +1,15 @@
 """Custom middleware for aiohttp."""
+from typing import Any
 import uuid
 
-from aiohttp.web import middleware
+from aiohttp.web import middleware, Request, Response
 import structlog
 
 log = structlog.get_logger()
 
 
 @middleware
-async def logger(request, handler):
+async def logger(request: Request, handler: Any) -> object:
     """
     Add a structlog logger to the request object.
 

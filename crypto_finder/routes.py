@@ -3,11 +3,13 @@ Routes module.
 
 Responsible for providing the means to register the application routes.
 """
+from aiohttp import web
+
 from crypto_finder.controllers.currency_api import CurrencyApiController
 from crypto_finder.controllers.ping import PingController
 
 
-def setup_routes(app):
+def setup_routes(app: web.Application):
     ping_controller = PingController()
     currency_api_controller = CurrencyApiController()
 
