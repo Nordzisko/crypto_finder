@@ -17,15 +17,11 @@ class DatabaseManager:
     """
 
     def __init__(self):
-        ###
         # Private database engine and metadata attributes.
-        #
         self._engine = None
         self._metadata = MetaData(schema=db_option("schema"))
 
-        ###
         # Declarative Base Model class.
-        #
         self.BaseModel = declarative_base(
             cls=BaseModelMixin, metadata=MetaData(schema=db_option("schema"))
         )
@@ -78,6 +74,12 @@ class DatabaseManager:
             sessionmaker(bind=self._engine, expire_on_commit=False, class_=AsyncSession)
         )
 
+    async def close_db_engine(self):
+        """
+        Dispose DB engine
+        """
+        await self.engine.dispose()
+
     async def create_all_models(self):
         """
         Create all models found in crypto_finder.models module
@@ -86,12 +88,6 @@ class DatabaseManager:
             importlib.import_module(full_module_name)
         async with self._engine.begin() as conn:
             await conn.run_sync(self.BaseModel.metadata.create_all)
-
-    async def close_db_engine(self):
-        """
-        Dispose DB engine
-        """
-        await self.engine.dispose()
 
 
 db = DatabaseManager()

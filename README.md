@@ -18,7 +18,7 @@ Docs to this API is accessible on URL `http://localhost:8899/docs` and is done w
 
 ## Usage
 
-To install & run:
+Install and run:
 
 ```
 docker-compose up
@@ -32,6 +32,14 @@ Application is exposed on port 8899 and has two endpoints:
 *Postgres* database is exposed on port 5432 and credentials if needed could be found in `config/default.conf` file.
 I would strongly suggest storing passwords in some tools for secrets such as Vault,
 but it is out of the scope of this project.
+
+### Tests
+
+To run tests:
+
+```
+docker-compose -f docker-compose.test.yml up
+```
 
 ### Code formatting
 

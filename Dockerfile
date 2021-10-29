@@ -23,7 +23,8 @@ RUN pip install --upgrade pip
 
 # Copy the application code
 COPY requirements.txt /app/
-RUN pip install -r /app/requirements.txt
+COPY test-requirements.txt /app/
+RUN pip install -r /app/requirements.txt -r /app/test-requirements.txt
 COPY . /app/
 
 ARG package_version

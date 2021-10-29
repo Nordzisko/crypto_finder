@@ -1,0 +1,9 @@
+idna==2.10
+msgpack
+pylint
+pytest
+pytest-aiohttp
+pytest-cov
+pytest-mock
+pytest-xdist
+pytest-catch-server
