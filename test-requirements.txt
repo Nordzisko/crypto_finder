@@ -10,6 +10,9 @@ astroid==2.8.4
     # via pylint
 async-timeout==3.0.1
     # via aiohttp
+asynctest==0.13.0
+    # via
+    #   -r test-requirements.in
 attrs==19.3.0
     # via
     #   aiohttp

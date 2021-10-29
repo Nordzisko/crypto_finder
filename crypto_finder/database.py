@@ -16,6 +16,8 @@ class DatabaseManager:
     Configuration class for DB that encapsulates engine and configured class for creating scoped session instances.
     """
 
+    Session = None
+
     def __init__(self):
         # Private database engine and metadata attributes.
         self._engine = None
